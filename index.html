@@ -850,7 +850,7 @@
         '<label class="field"><div class="lab">場所</div><input class="input" id="f-place" placeholder="豊中商工会議所"></label>' +
         '<label class="field"><div class="lab">回答枠（複数はカンマ区切り。空なら「出欠」だけ）</div><input class="input" id="f-slots" placeholder="出欠,懇親会"></label>' +
         '<label class="field"><div class="lab">締切（空なら開催日の3日前 18:00）</div><input class="input num" id="f-deadline" placeholder="2026/10/13 18:00"></label>' +
-        '<label class="field"><div class="lab">対象</div><select class="input" id="f-target"><option value="全員">全員</option>' + cs.map(function (c) { return '<option>' + esc(c) + '</option>'; }).join('') + '</select></label>' +
+        '<label class="field"><div class="lab">対象</div><select class="input" id="f-target"><option value="全員">全員</option>' + cs.map(function (c) { return '<option>' + esc(c) + '</option>'; }).join('') + '</select><div class="hint">正副＝理事長・直前・専務・副理事長・監事／理事会＝正副＋委員長・副委員長＋財政・事務局長／財政局＝財審用</div></label>' +
         '<label class="field"><div class="lab">補足（任意）</div><textarea class="note" id="f-bg" rows="2" placeholder="服装・持ち物・会費など"></textarea></label>' +
         '<div class="err" id="f-err"></div><div style="margin-top:16px"><button class="btn full" id="f-go">登録する</button></div></div>';
       document.getElementById('f-go').onclick = function () {
@@ -863,7 +863,7 @@
     function v(id) { return document.getElementById(id).value; }
   }
   function adminBulk(body) {
-    body.innerHTML = '<div class="card"><div class="eyebrow">一括登録</div><div class="hint" style="margin-top:4px">1行1件。順番: 日付, 事業名, 場所, 回答枠, 締切, 対象。場所以降は省略可。回答枠の複数は「;」区切り。同じ事業名は飛ばします。</div>' +
+    body.innerHTML = '<div class="card"><div class="eyebrow">一括登録</div><div class="hint" style="margin-top:4px">1行1件。順番: 日付, 事業名, 場所, 回答枠, 締切, 対象。場所以降は省略可。回答枠の複数は「;」区切り。対象は 全員／正副／理事会／財政局／委員会名。同じ事業名は飛ばします。</div>' +
       '<textarea class="bulk" id="bulk" placeholder="2026/12/05,卒業式,,出欠;懇親会\n2027/01/14,1月例会"></textarea>' +
       '<div style="margin-top:12px"><button class="btn full" id="bulkGo">まとめて登録</button></div><div id="bulkRes" style="margin-top:10px;font-size:13px"></div></div>';
     document.getElementById('bulkGo').onclick = function () {
