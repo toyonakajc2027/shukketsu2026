@@ -13,7 +13,7 @@
   --tint:#0B5FD0; --today:#FF3B30;
   --sun:#D0342C; --sat:#0B5FD0;
   --rijikai:#0B5FD0; --iinkai:#1E8A4C; --seifuku:#C2700A; --zaishin:#8A3FD1;
-  --reikai:#1D1D1F; --honkai:#D0342C; --block:#1F8FA3; --jotei:#8E8E93; --yoteisha:#8E8E93; --holiday:#D0342C; --lom:#C2185B;
+  --reikai:#1D1D1F; --honkai:#D0342C; --block:#1F8FA3; --jotei:#8E8E93; --yoteisha:#8E8E93; --genkou:#6E6E73; --holiday:#D0342C; --lom:#C2185B;
   --kento:#C2700A; --kento-bg:rgba(255,149,0,.14);
   --seg:rgba(118,118,128,.12); --knob:#FFFFFF; --knob-shadow:0 1px 3px rgba(0,0,0,.12),0 0 1px rgba(0,0,0,.08);
   --blur-bg:rgba(242,242,247,.78);
@@ -27,7 +27,7 @@
     --tint:#409CFF; --today:#FF453A;
     --sun:#FF6961; --sat:#5EA9FF;
     --rijikai:#409CFF; --iinkai:#30D158; --seifuku:#FF9F0A; --zaishin:#BF5AF2;
-    --reikai:#F5F5F7; --honkai:#FF6961; --block:#40C8E0; --jotei:#98989D; --yoteisha:#98989D; --holiday:#FF6961; --lom:#FF6FA0; --lom:#FF6FA0;
+    --reikai:#F5F5F7; --honkai:#FF6961; --block:#40C8E0; --jotei:#98989D; --yoteisha:#98989D; --genkou:#8E8E93; --holiday:#FF6961; --lom:#FF6FA0;
     --kento:#FF9F0A; --kento-bg:rgba(255,159,10,.18);
     --seg:rgba(118,118,128,.24); --knob:#636366; --knob-shadow:0 1px 3px rgba(0,0,0,.4);
     --blur-bg:rgba(20,21,23,.78);
@@ -41,7 +41,7 @@
   --tint:#409CFF; --today:#FF453A;
   --sun:#FF6961; --sat:#5EA9FF;
   --rijikai:#409CFF; --iinkai:#30D158; --seifuku:#FF9F0A; --zaishin:#BF5AF2;
-  --reikai:#F5F5F7; --honkai:#FF6961; --block:#40C8E0; --jotei:#98989D; --yoteisha:#98989D; --holiday:#FF6961; --lom:#FF6FA0;
+  --reikai:#F5F5F7; --honkai:#FF6961; --block:#40C8E0; --jotei:#98989D; --yoteisha:#98989D; --genkou:#8E8E93; --holiday:#FF6961; --lom:#FF6FA0;
   --kento:#FF9F0A; --kento-bg:rgba(255,159,10,.18);
   --seg:rgba(118,118,128,.24); --knob:#636366; --knob-shadow:0 1px 3px rgba(0,0,0,.4);
   --blur-bg:rgba(20,21,23,.78);
@@ -218,6 +218,7 @@ main{max-width:1180px;margin:0 auto;padding:12px 16px 40px}
 .lmonth:first-child{margin-top:0}
 .lmonth h3{margin:0 0 6px 4px;font-size:20px;font-weight:700;letter-spacing:-.02em;position:sticky;top:var(--barh,112px);z-index:5;background:var(--blur-bg);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);padding:8px 8px 6px;margin-left:-4px;border-radius:8px}
 .lmonth h3 small{font-size:12px;color:var(--ink2);font-weight:500;margin-left:8px}
+.ym.yoteisha-m h3{color:var(--ink2)}
 
 /* ── notes ── */
 .notes{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -261,7 +262,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 16px 32px;color:var(--ink2);font
     <div class="title">
       <h1>2027<span>年間予定</span></h1>
       <a class="org" href="/">豊中青年会議所</a>
-      <div class="ver">案 v1 ・ 2026-09-15</div>
+      <div class="ver">案 v1 ・ 2026-09-19 ・ 予定者期間(2026/9〜12)を含む</div>
       <button class="theme" id="theme" aria-label="ダーク表示に切り替え" title="表示の明るさ"></button>
     </div>
     <div class="row2">
@@ -323,7 +324,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 16px 32px;color:var(--ink2);font
     </div>
   </div>
 </main>
-<footer>データは 資料_年間予定/2027年間予定_統合.csv（2026-09-15 時点）。祝日は2027年の一般的なカレンダーで、官報告示後に照合します。予定を押すと詳しい説明が出ます。</footer>
+<footer>データは 資料_年間予定/2027年間予定_統合.csv と 2027予定者期間スケジュール_全件.csv（2026-09-19 時点）。2026/9〜12は予定者期間の会議（2026年度の予定は絞り込みで表示）。祝日は2027年の一般的なカレンダーで、官報告示後に照合します。予定を押すと詳しい説明が出ます。</footer>
 
 <div class="scrim" id="scrim"></div>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sh-title">
@@ -337,11 +338,11 @@ footer{max-width:1180px;margin:0 auto;padding:0 16px 32px;color:var(--ink2);font
 </div>
 
 <script>
-const EV = [{"d":"2027-01-01","c":"holiday","t":"元日","n":"","s":""},{"d":"2027-01-04","c":"jotei","t":"理事会1上程","n":"","s":""},{"d":"2027-01-07","c":"rijikai","t":"第1回理事会","n":"","s":""},{"d":"2027-01-11","c":"holiday","t":"成人の日","n":"","s":""},{"d":"2027-01-12","c":"lom","t":"新年賀会","n":"2026-09-14 専務予定者の指示","s":""},{"d":"2027-01-14","c":"iinkai","t":"第1回委員会","n":"","s":""},{"d":"2027-01-16","c":"jotei","t":"正副2上程","n":"正副1/19の3日前(土曜)。平日にするなら1/15(金)","s":""},{"d":"2027-01-19","c":"seifuku","t":"第2回正副","n":"2026-09-14 の案。京都会議(1/21〜24)を避けて1/21(木)から前倒し。まだ未定","s":"kento"},{"d":"2027-01-21","c":"honkai","t":"京都会議（1/21〜24）","n":"2026-09-14 専務予定者の指示","s":""},{"d":"2027-01-22","c":"honkai","t":"京都会議","n":"","s":""},{"d":"2027-01-23","c":"honkai","t":"京都会議","n":"","s":""},{"d":"2027-01-24","c":"honkai","t":"京都会議","n":"","s":""},{"d":"2027-01-24","c":"jotei","t":"財審2上程","n":"固定行事(京都会議)と重複→検討","s":"kento"},{"d":"2027-01-27","c":"zaishin","t":"第2回財審","n":"","s":""},{"d":"2027-02-01","c":"jotei","t":"理事会2上程","n":"","s":""},{"d":"2027-02-04","c":"rijikai","t":"第2回理事会","n":"","s":""},{"d":"2027-02-11","c":"holiday","t":"建国記念の日","n":"","s":""},{"d":"2027-02-12","c":"iinkai","t":"第2回委員会","n":"2026-09-14 の案。建国記念の日(2/11)を避けて翌日へ。まだ未定","s":"kento"},{"d":"2027-02-15","c":"jotei","t":"正副3上程","n":"","s":""},{"d":"2027-02-18","c":"seifuku","t":"第3回正副","n":"","s":""},{"d":"2027-02-21","c":"jotei","t":"財審3上程","n":"","s":""},{"d":"2027-02-23","c":"holiday","t":"天皇誕生日","n":"","s":""},{"d":"2027-02-24","c":"zaishin","t":"第3回財審","n":"前日が祝日(天皇誕生日)","s":""},{"d":"2027-02-25","c":"reikai","t":"2月例会","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-03-01","c":"jotei","t":"理事会3上程","n":"","s":""},{"d":"2027-03-04","c":"rijikai","t":"第3回理事会","n":"","s":""},{"d":"2027-03-11","c":"iinkai","t":"第3回委員会","n":"","s":""},{"d":"2027-03-15","c":"jotei","t":"正副4上程","n":"","s":""},{"d":"2027-03-18","c":"seifuku","t":"第4回正副","n":"","s":""},{"d":"2027-03-21","c":"holiday","t":"春分の日","n":"","s":""},{"d":"2027-03-21","c":"jotei","t":"財審4上程","n":"祝日(春分の日)と重複→検討。翌日が祝日(振替休日)","s":"kento"},{"d":"2027-03-22","c":"holiday","t":"振替休日","n":"","s":""},{"d":"2027-03-24","c":"zaishin","t":"第4回財審","n":"","s":""},{"d":"2027-03-25","c":"reikai","t":"3月例会","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-03-29","c":"jotei","t":"理事会4上程","n":"","s":""},{"d":"2027-04-01","c":"rijikai","t":"第4回理事会","n":"","s":""},{"d":"2027-04-08","c":"iinkai","t":"第4回委員会","n":"","s":""},{"d":"2027-04-12","c":"jotei","t":"正副5上程","n":"","s":""},{"d":"2027-04-15","c":"seifuku","t":"第5回正副","n":"","s":""},{"d":"2027-04-22","c":"reikai","t":"4月例会","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-04-25","c":"jotei","t":"財審5上程","n":"","s":""},{"d":"2027-04-28","c":"zaishin","t":"第5回財審","n":"翌日が祝日(昭和の日)","s":""},{"d":"2027-04-29","c":"holiday","t":"昭和の日","n":"","s":""},{"d":"2027-05-03","c":"holiday","t":"憲法記念日","n":"","s":""},{"d":"2027-05-03","c":"jotei","t":"理事会5上程","n":"祝日(憲法記念日)と重複→検討。翌日が祝日(みどりの日)","s":"kento"},{"d":"2027-05-04","c":"holiday","t":"みどりの日","n":"","s":""},{"d":"2027-05-05","c":"holiday","t":"こどもの日","n":"","s":""},{"d":"2027-05-06","c":"rijikai","t":"第5回理事会","n":"前日が祝日(こどもの日)","s":""},{"d":"2027-05-13","c":"iinkai","t":"第5回委員会","n":"","s":""},{"d":"2027-05-15","c":"jotei","t":"正副6上程","n":"正副5/18の3日前(土曜)。平日にするなら5/14(金)","s":""},{"d":"2027-05-18","c":"seifuku","t":"第6回正副","n":"2026-09-14 の案。ASPAC(5/20〜23)を避けて5/20(木)から前倒し。まだ未定","s":"kento"},{"d":"2027-05-20","c":"honkai","t":"ASPAC（5/20〜23）","n":"2026-09-14 専務予定者の指示（原文「アスパック」）","s":""},{"d":"2027-05-21","c":"honkai","t":"ASPAC","n":"","s":""},{"d":"2027-05-22","c":"honkai","t":"ASPAC","n":"","s":""},{"d":"2027-05-23","c":"honkai","t":"ASPAC","n":"","s":""},{"d":"2027-05-23","c":"jotei","t":"財審6上程","n":"固定行事(ASPAC)と重複→検討","s":"kento"},{"d":"2027-05-26","c":"zaishin","t":"第6回財審","n":"","s":""},{"d":"2027-05-27","c":"reikai","t":"5月例会（北地域8LOM合同）","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-05-31","c":"jotei","t":"理事会6上程","n":"","s":""},{"d":"2027-06-03","c":"rijikai","t":"第6回理事会","n":"","s":""},{"d":"2027-06-10","c":"iinkai","t":"第6回委員会","n":"","s":""},{"d":"2027-06-14","c":"jotei","t":"正副7上程","n":"","s":""},{"d":"2027-06-17","c":"seifuku","t":"第7回正副","n":"","s":""},{"d":"2027-06-20","c":"jotei","t":"財審7上程","n":"","s":""},{"d":"2027-06-23","c":"zaishin","t":"第7回財審","n":"","s":""},{"d":"2027-06-24","c":"reikai","t":"6月例会","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-06-28","c":"jotei","t":"理事会7上程","n":"","s":""},{"d":"2027-07-01","c":"rijikai","t":"第7回理事会","n":"","s":""},{"d":"2027-07-08","c":"iinkai","t":"第7回委員会","n":"","s":""},{"d":"2027-07-10","c":"honkai","t":"サマーコンファレンス（7/10・11）","n":"2026-09-14 専務予定者の指示（原文「サマコン」）","s":""},{"d":"2027-07-11","c":"honkai","t":"サマーコンファレンス","n":"","s":""},{"d":"2027-07-12","c":"jotei","t":"正副8上程","n":"","s":""},{"d":"2027-07-15","c":"seifuku","t":"第8回正副","n":"","s":""},{"d":"2027-07-19","c":"holiday","t":"海の日","n":"","s":""},{"d":"2027-07-22","c":"reikai","t":"7月例会","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-07-25","c":"jotei","t":"財審8上程","n":"","s":""},{"d":"2027-07-28","c":"zaishin","t":"第8回財審","n":"","s":""},{"d":"2027-08-02","c":"jotei","t":"理事会8上程","n":"","s":""},{"d":"2027-08-05","c":"rijikai","t":"第8回理事会","n":"","s":""},{"d":"2027-08-11","c":"holiday","t":"山の日","n":"","s":""},{"d":"2027-08-12","c":"iinkai","t":"第8回委員会","n":"2026-09-14 の案。前日が山の日・お盆だが据え置きの案。まだ未定","s":"kento"},{"d":"2027-08-16","c":"jotei","t":"正副9上程","n":"お盆期間だがアップロードのみ。8/12委員会据え置きに合わせ据え置き","s":""},{"d":"2027-08-19","c":"seifuku","t":"第9回正副","n":"","s":""},{"d":"2027-08-22","c":"jotei","t":"財審9上程","n":"","s":""},{"d":"2027-08-25","c":"zaishin","t":"第9回財審","n":"","s":""},{"d":"2027-08-26","c":"reikai","t":"8月例会","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-08-30","c":"jotei","t":"理事会9上程","n":"","s":""},{"d":"2027-09-02","c":"rijikai","t":"第9回理事会","n":"","s":""},{"d":"2027-09-09","c":"iinkai","t":"第9回委員会","n":"","s":""},{"d":"2027-09-13","c":"jotei","t":"正副10上程","n":"","s":""},{"d":"2027-09-16","c":"seifuku","t":"第10回正副","n":"","s":""},{"d":"2027-09-19","c":"jotei","t":"財審10上程","n":"翌日が祝日(敬老の日)","s":""},{"d":"2027-09-20","c":"holiday","t":"敬老の日","n":"","s":""},{"d":"2027-09-22","c":"zaishin","t":"第10回財審","n":"翌日が祝日(秋分の日)","s":""},{"d":"2027-09-23","c":"holiday","t":"秋分の日","n":"","s":""},{"d":"2027-09-23","c":"reikai","t":"9月公開例会","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-09-30","c":"honkai","t":"全国大会（9/30〜10/3）","n":"2026-09-14 専務予定者の指示。開催地は未記載","s":""},{"d":"2027-10-01","c":"honkai","t":"全国大会","n":"","s":""},{"d":"2027-10-02","c":"honkai","t":"全国大会","n":"","s":""},{"d":"2027-10-03","c":"honkai","t":"全国大会","n":"","s":""},{"d":"2027-10-04","c":"jotei","t":"理事会10上程","n":"","s":""},{"d":"2027-10-07","c":"rijikai","t":"第10回理事会","n":"","s":""},{"d":"2027-10-11","c":"holiday","t":"スポーツの日","n":"","s":""},{"d":"2027-10-14","c":"iinkai","t":"第10回委員会","n":"","s":""},{"d":"2027-10-18","c":"jotei","t":"正副11上程","n":"","s":""},{"d":"2027-10-21","c":"seifuku","t":"第11回正副","n":"","s":""},{"d":"2027-10-24","c":"jotei","t":"財審11上程","n":"","s":""},{"d":"2027-10-27","c":"zaishin","t":"第11回財審","n":"","s":""},{"d":"2027-10-28","c":"reikai","t":"10月例会（4LOM合同）","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-11-01","c":"jotei","t":"理事会11上程","n":"","s":""},{"d":"2027-11-02","c":"honkai","t":"JCI世界会議（11/2〜6）","n":"2026-09-14 専務予定者の指示。開催地は未記載","s":""},{"d":"2027-11-03","c":"holiday","t":"文化の日","n":"","s":""},{"d":"2027-11-03","c":"honkai","t":"JCI世界会議","n":"","s":""},{"d":"2027-11-04","c":"rijikai","t":"第11回理事会","n":"JCI世界会議(11/2〜6)と重複。案は11/11(木)へ後ろ倒しか10/28(木)へ前倒し。前日が文化の日","s":"kento"},{"d":"2027-11-04","c":"honkai","t":"JCI世界会議","n":"","s":""},{"d":"2027-11-05","c":"honkai","t":"JCI世界会議","n":"","s":""},{"d":"2027-11-06","c":"honkai","t":"JCI世界会議","n":"","s":""},{"d":"2027-11-11","c":"iinkai","t":"第11回委員会","n":"","s":""},{"d":"2027-11-15","c":"jotei","t":"正副12上程","n":"","s":""},{"d":"2027-11-18","c":"seifuku","t":"第12回正副","n":"","s":""},{"d":"2027-11-21","c":"jotei","t":"財審12上程","n":"","s":""},{"d":"2027-11-23","c":"holiday","t":"勤労感謝の日","n":"","s":""},{"d":"2027-11-24","c":"zaishin","t":"第12回財審","n":"前日が祝日(勤労感謝の日)","s":""},{"d":"2027-11-25","c":"reikai","t":"11月例会","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-11-29","c":"jotei","t":"理事会12上程","n":"","s":""},{"d":"2027-12-02","c":"rijikai","t":"第12回理事会","n":"","s":""},{"d":"2027-12-06","c":"block","t":"会員会議所会議","n":"2026-09-14 専務予定者の指示（当初2026年と誤記→2027年に訂正）","s":""},{"d":"2027-12-06","c":"block","t":"大阪ブロック大納会","n":"2026-09-14 専務予定者の指示（原文「大阪ブロック大納」。当初2026年と誤記→2027年に訂正）。2026年の大納会は12/2(水)で全件.csvに記載済","s":""},{"d":"2027-12-09","c":"iinkai","t":"第12回委員会","n":"","s":""},{"d":"2027-12-16","c":"yoteisha","t":"2028年度 第1回正副(予定者側が決める)","n":"","s":""},{"d":"2027-12-22","c":"yoteisha","t":"2028年度 第1回財審(予定者側が決める)","n":"","s":""},{"d":"2027-12-23","c":"reikai","t":"12月例会","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"}];
+const EV = [{"d":"2026-09-27","c":"lom","t":"理事長・監事選考委員会","n":"","s":""},{"d":"2026-09-27","c":"genkou","t":"9月公開例会","n":"2026年度（本年度）の予定","s":""},{"d":"2026-09-28","c":"seifuku","t":"第0回予定者正副","n":"2027年度予定者の会議。2026-09-19 9/29から移動（グロアラ）","s":""},{"d":"2026-09-30","c":"genkou","t":"大阪ブロック コンペ","n":"2026年度（本年度）の予定","s":""},{"d":"2026-10-01","c":"genkou","t":"第10回理事会","n":"2026年度（本年度）の予定","s":""},{"d":"2026-10-02","c":"genkou","t":"全国大会 神戸大会","n":"2026年度（本年度）の予定","s":""},{"d":"2026-10-02","c":"jotei","t":"予定者正副①上程","n":"上程日（今回の予定者期間はNG日なら前倒し運用）。全国大会中→前倒し","s":""},{"d":"2026-10-03","c":"genkou","t":"全国大会 神戸大会","n":"2026年度（本年度）の予定","s":""},{"d":"2026-10-04","c":"genkou","t":"全国大会 神戸大会","n":"2026年度（本年度）の予定","s":""},{"d":"2026-10-05","c":"lom","t":"理事選開票日（仮）","n":"","s":""},{"d":"2026-10-05","c":"seifuku","t":"第1回予定者正副","n":"2027年度予定者の会議","s":""},{"d":"2026-10-07","c":"genkou","t":"大阪ブロック正副会長会議","n":"2026年度（本年度）の予定","s":""},{"d":"2026-10-08","c":"genkou","t":"第10回委員会","n":"2026年度（本年度）の予定","s":""},{"d":"2026-10-12","c":"holiday","t":"スポーツの日","n":"","s":""},{"d":"2026-10-12","c":"jotei","t":"予定者理事会①上程","n":"上程日（今回の予定者期間はNG日なら前倒し運用）。理事会①10/15の3日前。NG日(韓国)→前倒し","s":""},{"d":"2026-10-13","c":"genkou","t":"大阪ブロックコンペ","n":"2026年度（本年度）の予定","s":""},{"d":"2026-10-14","c":"genkou","t":"茨木JC周年コンペ","n":"2026年度（本年度）の予定","s":""},{"d":"2026-10-15","c":"rijikai","t":"第1回予定者理事会","n":"2027年度予定者の会議。2026-09-19 10/14から移動。18:00頃〜、本年度第11回正副は19:30〜に繰り下げ","s":""},{"d":"2026-10-15","c":"genkou","t":"第11回正副","n":"2026-09-19 予定者理事会①の後 19:30〜に繰り下げ","s":""},{"d":"2026-10-16","c":"genkou","t":"例会 4LOM","n":"2026年度（本年度）の予定","s":""},{"d":"2026-10-17","c":"jotei","t":"予定者正副②上程","n":"上程日","s":""},{"d":"2026-10-19","c":"genkou","t":"北地域会員会議所⑤大阪","n":"2026年度（本年度）の予定","s":""},{"d":"2026-10-20","c":"seifuku","t":"第2回予定者正副","n":"2027年度予定者の会議","s":""},{"d":"2026-10-21","c":"genkou","t":"第11回財審","n":"2026年度（本年度）の予定","s":""},{"d":"2026-10-21","c":"jotei","t":"予定者理事②上程","n":"上程日（今回の予定者期間はNG日なら前倒し運用）。NG日(韓国)→前倒し","s":""},{"d":"2026-10-26","c":"rijikai","t":"第2回予定者理事会","n":"2027年度予定者の会議","s":""},{"d":"2026-10-27","c":"jotei","t":"予定者正副③上程","n":"上程日（今回の予定者期間はNG日なら前倒し運用）。正副③10/30の3日前。22:00〜グロアラの日→前倒し","s":""},{"d":"2026-10-28","c":"iinkai","t":"第1回予定者委員会","n":"2027年度予定者の会議","s":""},{"d":"2026-10-30","c":"seifuku","t":"第3回予定者正副","n":"2027年度予定者の会議。2026-09-19 11/1(日)から移動","s":""},{"d":"2026-11-03","c":"holiday","t":"文化の日","n":"","s":""},{"d":"2026-11-03","c":"jotei","t":"予定者理事③上程","n":"上程日（今回の予定者期間はNG日なら前倒し運用）。理事会③11/6の3日前(祝日)→11/2までに前倒し","s":""},{"d":"2026-11-04","c":"genkou","t":"大阪ブロック正副会長会議","n":"2026年度（本年度）の予定","s":""},{"d":"2026-11-05","c":"genkou","t":"第11回理事会","n":"2026年度（本年度）の予定","s":""},{"d":"2026-11-06","c":"rijikai","t":"第3回予定者理事会","n":"2027年度予定者の会議。2026-09-19 11/9から移動（クラーク11/7〜17）","s":""},{"d":"2026-11-06","c":"genkou","t":"10団体ゴルフ","n":"2026年度（本年度）の予定","s":""},{"d":"2026-11-12","c":"genkou","t":"第11回委員会","n":"2026年度（本年度）の予定","s":""},{"d":"2026-11-12","c":"genkou","t":"JCI世界会議（クラーク）","n":"2026年度（本年度）の予定","s":""},{"d":"2026-11-13","c":"genkou","t":"JCI世界会議（クラーク）","n":"2026年度（本年度）の予定","s":""},{"d":"2026-11-14","c":"genkou","t":"JCI世界会議（クラーク）","n":"2026年度（本年度）の予定","s":""},{"d":"2026-11-15","c":"genkou","t":"JCI世界会議（クラーク）","n":"2026年度（本年度）の予定","s":""},{"d":"2026-11-17","c":"jotei","t":"予定者正副④上程","n":"上程日（今回の予定者期間はNG日なら前倒し運用）。クラーク最終日→前倒し","s":""},{"d":"2026-11-18","c":"genkou","t":"伊丹交流コンペ","n":"2026年度（本年度）の予定","s":""},{"d":"2026-11-19","c":"genkou","t":"第11回正副","n":"2026年度（本年度）の予定","s":""},{"d":"2026-11-20","c":"seifuku","t":"第4回予定者正副","n":"2027年度予定者の会議","s":""},{"d":"2026-11-21","c":"genkou","t":"8LOM親睦事業","n":"2026年度（本年度）の予定","s":""},{"d":"2026-11-22","c":"jotei","t":"予定者財審④上程","n":"上程日（今回の予定者期間はNG日なら前倒し運用）。静岡→前倒し","s":""},{"d":"2026-11-23","c":"holiday","t":"勤労感謝の日","n":"","s":""},{"d":"2026-11-24","c":"iinkai","t":"第2回予定者委員会","n":"2027年度予定者の会議。2026-09-19 11/13から移動（クラーク）","s":""},{"d":"2026-11-25","c":"zaishin","t":"第4回予定者財審","n":"2027年度予定者の会議","s":""},{"d":"2026-11-25","c":"genkou","t":"第12回財審","n":"2026年度（本年度）の予定","s":""},{"d":"2026-11-26","c":"genkou","t":"11月例会","n":"2026年度（本年度）の予定","s":""},{"d":"2026-11-27","c":"genkou","t":"大阪ブロック役員会","n":"2026年度（本年度）の予定","s":""},{"d":"2026-11-28","c":"jotei","t":"予定者理事会④上程","n":"上程日","s":""},{"d":"2026-11-30","c":"genkou","t":"近畿地区","n":"2026年度（本年度）の予定","s":""},{"d":"2026-12-01","c":"rijikai","t":"第4回予定者理事会","n":"2027年度予定者の会議","s":""},{"d":"2026-12-01","c":"genkou","t":"近畿地区","n":"2026年度（本年度）の予定","s":""},{"d":"2026-12-02","c":"genkou","t":"大納会","n":"2026年度（本年度）の予定","s":""},{"d":"2026-12-02","c":"genkou","t":"会員会議所会議","n":"2026年度（本年度）の予定","s":""},{"d":"2026-12-03","c":"genkou","t":"第12回理事会","n":"2026年度（本年度）の予定","s":""},{"d":"2026-12-04","c":"iinkai","t":"第3回予定者委員会","n":"2027年度予定者の会議","s":""},{"d":"2026-12-04","c":"jotei","t":"予定者正副⑤上程","n":"上程日","s":""},{"d":"2026-12-05","c":"genkou","t":"卒業式","n":"2026年度（本年度）の予定","s":""},{"d":"2026-12-07","c":"seifuku","t":"第5回予定者正副","n":"2027年度予定者の会議","s":""},{"d":"2026-12-09","c":"jotei","t":"予定者財審⑤上程","n":"上程日","s":""},{"d":"2026-12-10","c":"genkou","t":"大阪ブロック正副会長会議","n":"2026年度（本年度）の予定","s":""},{"d":"2026-12-12","c":"zaishin","t":"第5回予定者財審","n":"2027年度予定者の会議","s":""},{"d":"2026-12-14","c":"jotei","t":"予定者理事会⑤上程","n":"上程日","s":""},{"d":"2026-12-16","c":"genkou","t":"シニア忘年会","n":"2026年度（本年度）の予定","s":""},{"d":"2026-12-18","c":"rijikai","t":"第5回予定者理事会","n":"2027年度予定者の会議","s":""},{"d":"2026-12-21","c":"iinkai","t":"第4回予定者委員会","n":"2027年度予定者の会議","s":""},{"d":"2026-12-22","c":"genkou","t":"近畿地区会員会議所","n":"2026年度（本年度）の予定","s":""},{"d":"2026-12-22","c":"jotei","t":"正副①上程","n":"上程日","s":""},{"d":"2026-12-23","c":"genkou","t":"北地域会員会議所⑥茨木","n":"2026年度（本年度）の予定","s":""},{"d":"2026-12-25","c":"seifuku","t":"第1回正副","n":"2027年度予定者の会議","s":""},{"d":"2026-12-27","c":"jotei","t":"財審①上程","n":"上程日","s":""},{"d":"2026-12-30","c":"zaishin","t":"第1回財審","n":"2027年度予定者の会議","s":""},{"d":"2027-01-01","c":"holiday","t":"元日","n":"","s":""},{"d":"2027-01-04","c":"jotei","t":"理事会1上程","n":"","s":""},{"d":"2027-01-07","c":"rijikai","t":"第1回理事会","n":"","s":""},{"d":"2027-01-11","c":"holiday","t":"成人の日","n":"","s":""},{"d":"2027-01-12","c":"lom","t":"新年賀会","n":"2026-09-14 専務予定者の指示","s":""},{"d":"2027-01-14","c":"iinkai","t":"第1回委員会","n":"","s":""},{"d":"2027-01-16","c":"jotei","t":"正副2上程","n":"正副1/19の3日前(土曜)。平日にするなら1/15(金)","s":""},{"d":"2027-01-19","c":"seifuku","t":"第2回正副","n":"2026-09-14 の案。京都会議(1/21〜24)を避けて1/21(木)から前倒し。まだ未定","s":"kento"},{"d":"2027-01-21","c":"honkai","t":"京都会議（1/21〜24）","n":"2026-09-14 専務予定者の指示","s":""},{"d":"2027-01-22","c":"honkai","t":"京都会議","n":"","s":""},{"d":"2027-01-23","c":"honkai","t":"京都会議","n":"","s":""},{"d":"2027-01-24","c":"honkai","t":"京都会議","n":"","s":""},{"d":"2027-01-24","c":"jotei","t":"財審2上程","n":"固定行事(京都会議)と重複→検討","s":"kento"},{"d":"2027-01-27","c":"zaishin","t":"第2回財審","n":"","s":""},{"d":"2027-02-01","c":"jotei","t":"理事会2上程","n":"","s":""},{"d":"2027-02-04","c":"rijikai","t":"第2回理事会","n":"","s":""},{"d":"2027-02-11","c":"holiday","t":"建国記念の日","n":"","s":""},{"d":"2027-02-12","c":"iinkai","t":"第2回委員会","n":"2026-09-14 の案。建国記念の日(2/11)を避けて翌日へ。まだ未定","s":"kento"},{"d":"2027-02-15","c":"jotei","t":"正副3上程","n":"","s":""},{"d":"2027-02-18","c":"seifuku","t":"第3回正副","n":"","s":""},{"d":"2027-02-21","c":"jotei","t":"財審3上程","n":"","s":""},{"d":"2027-02-23","c":"holiday","t":"天皇誕生日","n":"","s":""},{"d":"2027-02-24","c":"zaishin","t":"第3回財審","n":"前日が祝日(天皇誕生日)","s":""},{"d":"2027-02-25","c":"reikai","t":"2月例会","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-03-01","c":"jotei","t":"理事会3上程","n":"","s":""},{"d":"2027-03-04","c":"rijikai","t":"第3回理事会","n":"","s":""},{"d":"2027-03-11","c":"iinkai","t":"第3回委員会","n":"","s":""},{"d":"2027-03-15","c":"jotei","t":"正副4上程","n":"","s":""},{"d":"2027-03-18","c":"seifuku","t":"第4回正副","n":"","s":""},{"d":"2027-03-21","c":"holiday","t":"春分の日","n":"","s":""},{"d":"2027-03-21","c":"jotei","t":"財審4上程","n":"祝日(春分の日)と重複→検討。翌日が祝日(振替休日)","s":"kento"},{"d":"2027-03-22","c":"holiday","t":"振替休日","n":"","s":""},{"d":"2027-03-24","c":"zaishin","t":"第4回財審","n":"","s":""},{"d":"2027-03-25","c":"reikai","t":"3月例会","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-03-29","c":"jotei","t":"理事会4上程","n":"","s":""},{"d":"2027-04-01","c":"rijikai","t":"第4回理事会","n":"","s":""},{"d":"2027-04-08","c":"iinkai","t":"第4回委員会","n":"","s":""},{"d":"2027-04-12","c":"jotei","t":"正副5上程","n":"","s":""},{"d":"2027-04-15","c":"seifuku","t":"第5回正副","n":"","s":""},{"d":"2027-04-22","c":"reikai","t":"4月例会","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-04-25","c":"jotei","t":"財審5上程","n":"","s":""},{"d":"2027-04-28","c":"zaishin","t":"第5回財審","n":"翌日が祝日(昭和の日)","s":""},{"d":"2027-04-29","c":"holiday","t":"昭和の日","n":"","s":""},{"d":"2027-05-03","c":"holiday","t":"憲法記念日","n":"","s":""},{"d":"2027-05-03","c":"jotei","t":"理事会5上程","n":"祝日(憲法記念日)と重複→検討。翌日が祝日(みどりの日)","s":"kento"},{"d":"2027-05-04","c":"holiday","t":"みどりの日","n":"","s":""},{"d":"2027-05-05","c":"holiday","t":"こどもの日","n":"","s":""},{"d":"2027-05-06","c":"rijikai","t":"第5回理事会","n":"前日が祝日(こどもの日)","s":""},{"d":"2027-05-13","c":"iinkai","t":"第5回委員会","n":"","s":""},{"d":"2027-05-15","c":"jotei","t":"正副6上程","n":"正副5/18の3日前(土曜)。平日にするなら5/14(金)","s":""},{"d":"2027-05-18","c":"seifuku","t":"第6回正副","n":"2026-09-14 の案。ASPAC(5/20〜23)を避けて5/20(木)から前倒し。まだ未定","s":"kento"},{"d":"2027-05-20","c":"honkai","t":"ASPAC（5/20〜23）","n":"2026-09-14 専務予定者の指示（原文「アスパック」）","s":""},{"d":"2027-05-21","c":"honkai","t":"ASPAC","n":"","s":""},{"d":"2027-05-22","c":"honkai","t":"ASPAC","n":"","s":""},{"d":"2027-05-23","c":"honkai","t":"ASPAC","n":"","s":""},{"d":"2027-05-23","c":"jotei","t":"財審6上程","n":"固定行事(ASPAC)と重複→検討","s":"kento"},{"d":"2027-05-26","c":"zaishin","t":"第6回財審","n":"","s":""},{"d":"2027-05-27","c":"reikai","t":"5月例会（北地域8LOM合同）","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-05-31","c":"jotei","t":"理事会6上程","n":"","s":""},{"d":"2027-06-03","c":"rijikai","t":"第6回理事会","n":"","s":""},{"d":"2027-06-10","c":"iinkai","t":"第6回委員会","n":"","s":""},{"d":"2027-06-14","c":"jotei","t":"正副7上程","n":"","s":""},{"d":"2027-06-17","c":"seifuku","t":"第7回正副","n":"","s":""},{"d":"2027-06-20","c":"jotei","t":"財審7上程","n":"","s":""},{"d":"2027-06-23","c":"zaishin","t":"第7回財審","n":"","s":""},{"d":"2027-06-24","c":"reikai","t":"6月例会","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-06-28","c":"jotei","t":"理事会7上程","n":"","s":""},{"d":"2027-07-01","c":"rijikai","t":"第7回理事会","n":"","s":""},{"d":"2027-07-08","c":"iinkai","t":"第7回委員会","n":"","s":""},{"d":"2027-07-10","c":"honkai","t":"サマーコンファレンス（7/10・11）","n":"2026-09-14 専務予定者の指示（原文「サマコン」）","s":""},{"d":"2027-07-11","c":"honkai","t":"サマーコンファレンス","n":"","s":""},{"d":"2027-07-12","c":"jotei","t":"正副8上程","n":"","s":""},{"d":"2027-07-15","c":"seifuku","t":"第8回正副","n":"","s":""},{"d":"2027-07-19","c":"holiday","t":"海の日","n":"","s":""},{"d":"2027-07-22","c":"reikai","t":"7月例会","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-07-25","c":"jotei","t":"財審8上程","n":"","s":""},{"d":"2027-07-28","c":"zaishin","t":"第8回財審","n":"","s":""},{"d":"2027-08-02","c":"jotei","t":"理事会8上程","n":"","s":""},{"d":"2027-08-05","c":"rijikai","t":"第8回理事会","n":"","s":""},{"d":"2027-08-11","c":"holiday","t":"山の日","n":"","s":""},{"d":"2027-08-12","c":"iinkai","t":"第8回委員会","n":"2026-09-14 の案。前日が山の日・お盆だが据え置きの案。まだ未定","s":"kento"},{"d":"2027-08-16","c":"jotei","t":"正副9上程","n":"お盆期間だがアップロードのみ。8/12委員会据え置きに合わせ据え置き","s":""},{"d":"2027-08-19","c":"seifuku","t":"第9回正副","n":"","s":""},{"d":"2027-08-22","c":"jotei","t":"財審9上程","n":"","s":""},{"d":"2027-08-25","c":"zaishin","t":"第9回財審","n":"","s":""},{"d":"2027-08-26","c":"reikai","t":"8月例会","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-08-30","c":"jotei","t":"理事会9上程","n":"","s":""},{"d":"2027-09-02","c":"rijikai","t":"第9回理事会","n":"","s":""},{"d":"2027-09-09","c":"iinkai","t":"第9回委員会","n":"","s":""},{"d":"2027-09-13","c":"jotei","t":"正副10上程","n":"","s":""},{"d":"2027-09-16","c":"seifuku","t":"第10回正副","n":"","s":""},{"d":"2027-09-19","c":"jotei","t":"財審10上程","n":"翌日が祝日(敬老の日)","s":""},{"d":"2027-09-20","c":"holiday","t":"敬老の日","n":"","s":""},{"d":"2027-09-22","c":"zaishin","t":"第10回財審","n":"翌日が祝日(秋分の日)","s":""},{"d":"2027-09-23","c":"holiday","t":"秋分の日","n":"","s":""},{"d":"2027-09-23","c":"reikai","t":"9月公開例会","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-09-30","c":"honkai","t":"全国大会（9/30〜10/3）","n":"2026-09-14 専務予定者の指示。開催地は未記載","s":""},{"d":"2027-10-01","c":"honkai","t":"全国大会","n":"","s":""},{"d":"2027-10-02","c":"honkai","t":"全国大会","n":"","s":""},{"d":"2027-10-03","c":"honkai","t":"全国大会","n":"","s":""},{"d":"2027-10-04","c":"jotei","t":"理事会10上程","n":"","s":""},{"d":"2027-10-07","c":"rijikai","t":"第10回理事会","n":"","s":""},{"d":"2027-10-11","c":"holiday","t":"スポーツの日","n":"","s":""},{"d":"2027-10-14","c":"iinkai","t":"第10回委員会","n":"","s":""},{"d":"2027-10-18","c":"jotei","t":"正副11上程","n":"","s":""},{"d":"2027-10-21","c":"seifuku","t":"第11回正副","n":"","s":""},{"d":"2027-10-24","c":"jotei","t":"財審11上程","n":"","s":""},{"d":"2027-10-27","c":"zaishin","t":"第11回財審","n":"","s":""},{"d":"2027-10-28","c":"reikai","t":"10月例会（4LOM合同）","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-11-01","c":"jotei","t":"理事会11上程","n":"","s":""},{"d":"2027-11-02","c":"honkai","t":"JCI世界会議（11/2〜6）","n":"2026-09-14 専務予定者の指示。開催地は未記載","s":""},{"d":"2027-11-03","c":"holiday","t":"文化の日","n":"","s":""},{"d":"2027-11-03","c":"honkai","t":"JCI世界会議","n":"","s":""},{"d":"2027-11-04","c":"rijikai","t":"第11回理事会","n":"JCI世界会議(11/2〜6)と重複。案は11/11(木)へ後ろ倒しか10/28(木)へ前倒し。前日が文化の日","s":"kento"},{"d":"2027-11-04","c":"honkai","t":"JCI世界会議","n":"","s":""},{"d":"2027-11-05","c":"honkai","t":"JCI世界会議","n":"","s":""},{"d":"2027-11-06","c":"honkai","t":"JCI世界会議","n":"","s":""},{"d":"2027-11-11","c":"iinkai","t":"第11回委員会","n":"","s":""},{"d":"2027-11-15","c":"jotei","t":"正副12上程","n":"","s":""},{"d":"2027-11-18","c":"seifuku","t":"第12回正副","n":"","s":""},{"d":"2027-11-21","c":"jotei","t":"財審12上程","n":"","s":""},{"d":"2027-11-23","c":"holiday","t":"勤労感謝の日","n":"","s":""},{"d":"2027-11-24","c":"zaishin","t":"第12回財審","n":"前日が祝日(勤労感謝の日)","s":""},{"d":"2027-11-25","c":"reikai","t":"11月例会","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-11-29","c":"jotei","t":"理事会12上程","n":"","s":""},{"d":"2027-12-02","c":"rijikai","t":"第12回理事会","n":"","s":""},{"d":"2027-12-06","c":"block","t":"会員会議所会議","n":"2026-09-14 専務予定者の指示（当初2026年と誤記→2027年に訂正）","s":""},{"d":"2027-12-06","c":"block","t":"大阪ブロック大納会","n":"2026-09-14 専務予定者の指示（原文「大阪ブロック大納」。当初2026年と誤記→2027年に訂正）。2026年の大納会は12/2(水)で全件.csvに記載済","s":""},{"d":"2027-12-09","c":"iinkai","t":"第12回委員会","n":"","s":""},{"d":"2027-12-16","c":"yoteisha","t":"2028年度 第1回正副(予定者側が決める)","n":"","s":""},{"d":"2027-12-22","c":"yoteisha","t":"2028年度 第1回財審(予定者側が決める)","n":"","s":""},{"d":"2027-12-23","c":"reikai","t":"12月例会","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"}];
 const CAT = {
   lom:['LOM行事',true], rijikai:['理事会',true], iinkai:['委員会',true], seifuku:['正副',true], zaishin:['財審',true],
   reikai:['例会（仮）',true], honkai:['日本JC・JCI',true], block:['大阪ブロック',true],
-  jotei:['上程日',false], yoteisha:['2028予定者',false], holiday:['祝日',true]
+  jotei:['上程日',false], yoteisha:['2028予定者',false], genkou:['2026年度の予定',false], holiday:['祝日',true]
 };
 const DOW = ['日','月','火','水','木','金','土'];
 const isPhone = () => matchMedia('(max-width:700px)').matches;
@@ -358,6 +359,20 @@ function applyTheme() {
 document.getElementById('theme').onclick = () => { theme = theme === 'dark' ? 'light' : 'dark'; try { localStorage.setItem('jc2027-theme', theme); } catch (_) {} applyTheme(); };
 applyTheme();
 const Y = 2027;
+/* 表示する月: 2026/9〜12 は予定者期間、2027/1〜12 は本年度 */
+const MONTHS = [];
+for (let m = 9; m <= 12; m++) MONTHS.push({ y: 2026, m });
+for (let m = 1; m <= 12; m++) MONTHS.push({ y: 2027, m });
+const mkey = ym => `${ym.y}-${String(ym.m).padStart(2,'0')}`;
+const mlabel = ym => ym.y === Y ? `${ym.m}月` : `${ym.y}年${ym.m}月`;
+const msub = ym => ym.y === Y ? '' : '予定者期間';
+const mhash = ym => ym.y === Y ? `m${ym.m}` : `m${ym.y}-${ym.m}`;
+const midx = (y, m) => MONTHS.findIndex(x => x.y === y && x.m === m);
+function parseMonthHash(h) {
+  let mm = h.match(/^m(\d{4})-(\d{1,2})$/); if (mm) return midx(+mm[1], +mm[2]);
+  mm = h.match(/^m(\d{1,2})$/); if (mm) return midx(Y, +mm[1]);
+  return -1;
+}
 const todayISO = new Date().toISOString().slice(0,10);
 const byDay = {};
 EV.forEach(e => (byDay[e.d] = byDay[e.d] || []).push(e));
@@ -366,18 +381,18 @@ let on = Object.fromEntries(Object.entries(CAT).map(([k,v]) => [k, v[1]]));
 try { const s = JSON.parse(localStorage.getItem('jc2027-filters') || 'null'); if (s) on = { ...on, ...s }; } catch (_) {}
 const saveFilters = () => { try { localStorage.setItem('jc2027-filters', JSON.stringify(on)); } catch (_) {} };
 
-const state = { view: 'month', m: 1, sel: null };
+const state = { view: 'month', i: midx(Y, 1), sel: null };
 (function initState() {
   const wide = window.innerWidth >= 1000;
   const now = new Date();
-  state.m = now.getFullYear() === Y ? now.getMonth() + 1 : 1;
+  const ti = midx(now.getFullYear(), now.getMonth() + 1); state.i = ti >= 0 ? ti : midx(Y, 1);
   state.view = wide ? 'year' : 'month';
   const h = location.hash.replace('#', '');
   if (h === 'year' || h === 'list') state.view = h;
-  const mm = h.match(/^m(\d{1,2})$/); if (mm) { state.view = 'month'; state.m = Math.min(12, Math.max(1, +mm[1])); }
+  const hi = parseMonthHash(h); if (hi >= 0) { state.view = 'month'; state.i = hi; }
 })();
 
-const iso = (m, d) => `${Y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+const iso = (ym, d) => `${mkey(ym)}-${String(d).padStart(2,'0')}`;
 const visible = e => on[e.c];
 const isHol = key => (byDay[key] || []).some(e => e.c === 'holiday');
 const dayClass = (dow, key) => (dow === 0 ? ' sun' : dow === 6 ? ' sat' : '') + (isHol(key) ? ' hol' : '') + (key === todayISO ? ' today' : '');
@@ -398,8 +413,8 @@ Object.entries(CAT).forEach(([k, [label]]) => {
 
 /* view switching */
 document.querySelectorAll('.seg button').forEach(b => b.onclick = () => { state.view = b.dataset.view; state.sel = null; render(); });
-document.getElementById('prev').onclick = () => { if (state.m > 1) { state.m--; state.sel = null; render(); } };
-document.getElementById('next').onclick = () => { if (state.m < 12) { state.m++; state.sel = null; render(); } };
+document.getElementById('prev').onclick = () => { if (state.i > 0) { state.i--; state.sel = null; render(); } };
+document.getElementById('next').onclick = () => { if (state.i < MONTHS.length - 1) { state.i++; state.sel = null; render(); } };
 document.addEventListener('keydown', ev => {
   if (state.view !== 'month' || sheetOpen) return;
   if (ev.key === 'ArrowLeft') document.getElementById('prev').click();
@@ -413,22 +428,22 @@ function render() {
   document.querySelectorAll('.seg button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.view === state.view)));
   ['year','month','list'].forEach(v => document.getElementById('view-' + v).classList.toggle('hide', v !== state.view));
   document.getElementById('nav').classList.toggle('hide', state.view !== 'month');
-  history.replaceState(null, '', '#' + (state.view === 'month' ? 'm' + state.m : state.view));
+  history.replaceState(null, '', '#' + (state.view === 'month' ? mhash(MONTHS[state.i]) : state.view));
   if (state.view === 'month') renderMonth();
   if (state.view === 'year') renderYear();
   if (state.view === 'list') renderList();
 }
 
 function renderMonth() {
-  const m = state.m;
-  document.getElementById('prev').disabled = m === 1; document.getElementById('next').disabled = m === 12;
-  const cnt = EV.filter(e => e.d.startsWith(iso(m,1).slice(0,8)) && visible(e) && e.c !== 'holiday' && e.c !== 'jotei').length;
-  document.getElementById('cur').innerHTML = `${m}月<small>${cnt}件</small>`;
+  const ym = MONTHS[state.i], m = ym.m;
+  document.getElementById('prev').disabled = state.i === 0; document.getElementById('next').disabled = state.i === MONTHS.length - 1;
+  const cnt = EV.filter(e => e.d.startsWith(mkey(ym)) && visible(e) && e.c !== 'holiday' && e.c !== 'jotei').length;
+  document.getElementById('cur').innerHTML = `${mlabel(ym)}<small>${cnt}件${msub(ym) ? '・' + msub(ym) : ''}</small>`;
   const g = document.getElementById('mgrid'); g.innerHTML = '';
-  const first = new Date(Y, m-1, 1).getDay(), last = new Date(Y, m, 0).getDate();
+  const first = new Date(ym.y, m-1, 1).getDay(), last = new Date(ym.y, m, 0).getDate();
   for (let i = 0; i < first; i++) { const x = document.createElement('div'); x.className = 'cell empty'; g.appendChild(x); }
   for (let d = 1; d <= last; d++) {
-    const key = iso(m, d), dow = new Date(Y, m-1, d).getDay();
+    const key = iso(ym, d), dow = new Date(ym.y, m-1, d).getDay();
     const evs = (byDay[key] || []).filter(visible);
     const hol = evs.find(e => e.c === 'holiday');
     const cell = document.createElement('button'); cell.className = 'cell' + dayClass(dow, key) + (state.sel === key ? ' sel' : '');
@@ -448,7 +463,7 @@ function renderMonth() {
   const ag = document.getElementById('agenda'); ag.innerHTML = '';
   let any = false;
   for (let d = 1; d <= last; d++) {
-    const key = iso(m, d), dow = new Date(Y, m-1, d).getDay();
+    const key = iso(ym, d), dow = new Date(ym.y, m-1, d).getDay();
     const evs = (byDay[key] || []).filter(visible);
     if (!evs.length) continue; any = true;
     ag.appendChild(agendaRow(key, d, dow, evs, `${DOW[dow]}`));
@@ -484,21 +499,22 @@ function groupRuns(items, m) {
   });
   return groups;
 }
-function gotoMonth(m, sel) { state.view = 'month'; state.m = m; state.sel = sel || null; render(); window.scrollTo({ top: 0 }); if (sel) setTimeout(() => scrollAgenda(sel), 50); }
+function gotoMonth(i, sel) { state.view = 'month'; state.i = i; state.sel = sel || null; render(); window.scrollTo({ top: 0 }); if (sel) setTimeout(() => scrollAgenda(sel), 50); }
 function renderYear() {
   const g = document.getElementById('ygrid'); g.innerHTML = '';
-  for (let m = 1; m <= 12; m++) {
-    const first = new Date(Y, m-1, 1).getDay(), last = new Date(Y, m, 0).getDate();
-    const mev = EV.filter(e => e.d.startsWith(iso(m,1).slice(0,8)) && visible(e));
+  MONTHS.forEach((ym, i) => {
+    const m = ym.m;
+    const first = new Date(ym.y, m-1, 1).getDay(), last = new Date(ym.y, m, 0).getDate();
+    const mev = EV.filter(e => e.d.startsWith(mkey(ym)) && visible(e));
     const cnt = mev.filter(e => e.c !== 'holiday' && e.c !== 'jotei').length;
-    const card = document.createElement('section'); card.className = 'card ym';
-    card.innerHTML = `<h3>${m}月<small>${cnt}件</small><button type="button" aria-label="${m}月を大きく見る">月で見る ›</button></h3>`;
-    card.querySelector('h3 button').onclick = () => gotoMonth(m);
+    const card = document.createElement('section'); card.className = 'card ym' + (ym.y === Y ? '' : ' yoteisha-m');
+    card.innerHTML = `<h3>${mlabel(ym)}<small>${cnt}件${msub(ym) ? '・' + msub(ym) : ''}</small><button type="button" aria-label="${mlabel(ym)}を大きく見る">月で見る ›</button></h3>`;
+    card.querySelector('h3 button').onclick = () => gotoMonth(i);
     const gr = document.createElement('div'); gr.className = 'g';
     DOW.forEach(d => { const x = document.createElement('span'); x.className = 'dh'; x.textContent = d; gr.appendChild(x); });
     for (let i = 0; i < first; i++) gr.appendChild(document.createElement('span'));
     for (let d = 1; d <= last; d++) {
-      const key = iso(m, d), dow = new Date(Y, m-1, d).getDay();
+      const key = iso(ym, d), dow = new Date(ym.y, m-1, d).getDay();
       const x = document.createElement('button'); x.className = 'd' + dayClass(dow, key);
       const evs = (byDay[key] || []).filter(visible).filter(e => e.c !== 'holiday' && e.c !== 'jotei');
       const hol = (byDay[key] || []).find(e => e.c === 'holiday');
@@ -507,7 +523,7 @@ function renderYear() {
       const dd = document.createElement('span'); dd.className = 'dd';
       evs.slice(0,3).forEach(e => { const i = document.createElement('i'); i.className = (e.s === 'kari' ? 'kari ' : '') + (e.s === 'kento' ? 'kento' : ''); i.style.setProperty('--c', `var(--${e.c})`); dd.appendChild(i); });
       x.appendChild(dd);
-      x.onclick = () => { if (evs.length === 1) openSheet(evs[0]); else gotoMonth(m, key); };
+      x.onclick = () => { if (evs.length === 1) openSheet(evs[0]); else gotoMonth(i, key); };
       gr.appendChild(x);
     }
     card.appendChild(gr);
@@ -522,26 +538,27 @@ function renderYear() {
     });
     if (hl.children.length) card.appendChild(hl);
     g.appendChild(card);
-  }
+  });
 }
 function renderList() {
   const L = document.getElementById('lst'); L.innerHTML = '';
-  for (let m = 1; m <= 12; m++) {
-    const last = new Date(Y, m, 0).getDate();
+  MONTHS.forEach(ym => {
+    const m = ym.m;
+    const last = new Date(ym.y, m, 0).getDate();
     const wrap = document.createElement('div'); wrap.className = 'lmonth';
     const card = document.createElement('div'); card.className = 'card';
     let cnt = 0;
     for (let d = 1; d <= last; d++) {
-      const key = iso(m, d), dow = new Date(Y, m-1, d).getDay();
+      const key = iso(ym, d), dow = new Date(ym.y, m-1, d).getDay();
       const evs = (byDay[key] || []).filter(visible);
       if (!evs.length) continue;
       cnt += evs.filter(e => e.c !== 'holiday' && e.c !== 'jotei').length;
       card.appendChild(agendaRow(key, d, dow, evs, `${m}/${d} ${DOW[dow]}`));
     }
-    wrap.innerHTML = `<h3>${m}月<small>${cnt}件</small></h3>`;
+    wrap.innerHTML = `<h3>${mlabel(ym)}<small>${cnt}件${msub(ym) ? '・' + msub(ym) : ''}</small></h3>`;
     if (!card.children.length) card.innerHTML = '<div class="empty-msg">表示する予定はありません</div>';
     wrap.appendChild(card); L.appendChild(wrap);
-  }
+  });
 }
 
 /* sheet */
@@ -568,8 +585,8 @@ sheet.addEventListener('touchend', ev => { if (ty !== null && ev.changedTouches[
 window.addEventListener('hashchange', () => {
   const h = location.hash.replace('#', '');
   if (h === 'year' || h === 'list') { if (state.view !== h) { state.view = h; state.sel = null; render(); } return; }
-  const mm = h.match(/^m(\d{1,2})$/);
-  if (mm && (state.view !== 'month' || state.m !== +mm[1])) { state.view = 'month'; state.m = Math.min(12, Math.max(1, +mm[1])); state.sel = null; if (sheetOpen) closeSheet(); render(); }
+  const hi = parseMonthHash(h);
+  if (hi >= 0 && (state.view !== 'month' || state.i !== hi)) { state.view = 'month'; state.i = hi; state.sel = null; if (sheetOpen) closeSheet(); render(); }
 });
 render();
 </script>
